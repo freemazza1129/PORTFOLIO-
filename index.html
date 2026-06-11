@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Developer Portfolio</title>
+    <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 border-b border-gray-700 px-6 py-4 flex justify-between items-center shadow-md">
+        <h1 class="text-xl font-bold tracking-wider text-indigo-400">⚡ MY_PORTFOLIO</h1>
+        <button onclick="toggleAdminModal()" class="text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 px-3 py-1.5 rounded transition duration-200">
+            Admin Portal
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-12 w-full flex-grow">
+        <!-- Hero Section -->
+        <header class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Welcome to My Project Showcase</h2>
+            <p class="text-gray-400 text-lg max-w-xl mx-auto">A live tracking dashboard of my software applications, developer tools, and recent builds.</p>
+        </header>
+
+        <!-- Projects Grid Container -->
+        <section>
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamic Projects Will Load Here via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 border-t border-gray-700 text-center py-6 text-sm text-gray-500">
+        <p>&copy; 2026 Live Portfolio. Powered by GitHub Pages.</p>
+    </footer>
+
+    <!-- Admin Authentication Modal -->
+    <div id="admin-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 w-full max-w-md shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-semibold text-white">Admin Authentication</h3>
+                <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-white text-xl">&times;</button>
+            </div>
+            
+            <!-- Step 1: Login Form -->
+            <div id="login-form-panel">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Enter Admin Password</label>
+                    <input type="password" id="admin-password" class="w-full bg-gray-900 border border-gray-600 rounded p-2.5 text-white focus:outline-none focus:border-indigo-500" placeholder="••••••••">
+                    <p id="login-error" class="text-red-500 text-xs mt-2 hidden">Incorrect password. Please try again.</p>
+                </div>
+                <button onclick="verifyPassword()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded transition">
+                    Unlock Dashboard
+                </button>
+            </div>
+
+            <!-- Step 2: Project Creator Form (Hidden by Default) -->
+            <div id="project-form-panel" class="hidden">
+                <div class="bg-green-900/30 border border-green-700 text-green-400 text-xs rounded p-3 mb-4 text-center">
+                    ✓ Authenticated Admin Session Active
+                </div>
+                <div class="mb-3">
+                    <label class="block text-xs font-medium text-gray-400 mb-1">Project Title</label>
+                    <input type="text" id="proj-title" class="w-full bg-gray-900 border border-gray-600 rounded p-2 text-white text-sm focus:outline-none focus:border-indigo-500">
+                </div>
+                <div class="mb-3">
+                    <label class="block text-xs font-medium text-gray-400 mb-1">Description</label>
+                    <textarea id="proj-desc" rows="3" class="w-full bg-gray-900 border border-gray-600 rounded p-2 text-white text-sm focus:outline-none focus:border-indigo-500"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-xs font-medium text-gray-400 mb-1">Project URL / Link</label>
+                    <input type="url" id="proj-link" value="https://" class="w-full bg-gray-900 border border-gray-600 rounded p-2 text-white text-sm focus:outline-none focus:border-indigo-500">
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="addNewProject()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded text-sm transition">
+                        Publish Project
+                    </button>
+                    <button onclick="logoutAdmin()" class="bg-gray-700 hover:bg-gray-600 text-gray-300 font-medium py-2 px-4 rounded text-sm transition">
+                        Lock
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Architecture Handles Display and Admin Validation Logic -->
+    <script>
+        // Seed some sample project layouts if memory is completely empty
+        const defaultProjects = [
+            { title: "E-Commerce System", desc: "A robust full-stack shopping portal featuring lightning fast item search interfaces.", link: "#" },
+            { title: "Task Manager Tool", desc: "A sleek workspace helper app designed to clean up daily developer workflows.", link: "#" }
+        ];
+
+        // Core Application State
+        let projects = JSON.parse(localStorage.getItem('my_portfolio_projects')) || defaultProjects;
+
+        // Render projects onto screen
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = '';
+
+            if(projects.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-12">No projects displayed yet. Use the Admin Portal to add your first one!</p>`;
+                return;
+            }
+
+            projects.forEach((proj, index) => {
+                grid.innerHTML += `
+                    <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-indigo-500 transition duration-300 flex flex-col justify-between group shadow-lg">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition">${proj.title}</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6">${proj.desc}</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <a href="${proj.link}" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-semibold text-sm flex items-center gap-1">
+                                View Project <span>&rarr;</span>
+                            </a>
+                            <button onclick="deleteProject(${index})" class="admin-only hidden text-xs text-red-400 hover:text-red-300 bg-red-950/40 px-2 py-1 rounded border border-red-900">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Check if admin is currently logged in to persistent state to show delete buttons
+            if (sessionStorage.getItem('isAdminAuthenticated') === 'true') {
+                showAdminFeatures();
+            }
+        }
+
+        // Modal Views Toggle Engine
+        function toggleAdminModal() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.toggle('hidden');
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('admin-password').value = '';
+        }
+
+        // Strict Password Evaluation 
+        function verifyPassword() {
+            const passwordInput = document.getElementById('admin-password').value;
+            const errorText = document.getElementById('login-error');
+
+            if (passwordInput === "freemazza1129") {
+                sessionStorage.setItem('isAdminAuthenticated', 'true');
+                showAdminFeatures();
+                errorText.classList.add('hidden');
+            } else {
+                errorText.classList.remove('hidden');
+            }
+        }
+
+        function showAdminFeatures() {
+            document.getElementById('login-form-panel').classList.add('hidden');
+            document.getElementById('project-form-panel').classList.remove('hidden');
+            
+            // Unhide delete triggers across all cards
+            const deleteButtons = document.querySelectorAll('.admin-only');
+            deleteButtons.forEach(btn => btn.classList.remove('hidden'));
+        }
+
+        // Add New Custom User Data Project
+        function addNewProject() {
+            const title = document.getElementById('proj-title').value.trim();
+            const desc = document.getElementById('proj-desc').value.trim();
+            const link = document.getElementById('proj-link').value.trim();
+
+            if (!title || !desc) {
+                alert('Please fill out both the Title and Description fields.');
+                return;
+            }
+
+            // Append item data package
+            projects.push({ title, desc, link });
+            localStorage.setItem('my_portfolio_projects', JSON.stringify(projects));
+            
+            // Reset fields and refresh layout grid
+            document.getElementById('proj-title').value = '';
+            document.getElementById('proj-desc').value = '';
+            document.getElementById('proj-link').value = 'https://';
+            
+            renderProjects();
+            toggleAdminModal();
+        }
+
+        // Delete project entry item
+        function deleteProject(index) {
