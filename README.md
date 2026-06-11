@@ -1,6 +1,6 @@
 # PORTFOLIO-                                              # Hi there, I'm Glen Washington Pez 
 
-An adaptable cybersecurity researcher, command-line interface (CLI) developer, and technical administrator based in Kisumu, Kenya. I specialize in penetration testing, advanced network routing, and automated tool development.
+An adaptable  self taught phone based cybersecurity researcher, command-line interface (CLI) developer, and technical administrator based in Kisumu, Kenya. I specialize in penetration testing, advanced network routing, and automated tool development.
 
 **Open for Collaborations:** 
 * **Phone/WhatsApp:** +254 742 582 819
