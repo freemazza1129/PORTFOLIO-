@@ -30,9 +30,9 @@ An adaptable  self taught phone based cybersecurity researcher, command-line int
  * **editing * ** acc:freemazza tiktok.
 ### Management & Creative
 * **Project Administration:** Managing business workflows, deadlines, and finance via python system.
-* **Freelancing:** Client communication, scoping technical requirements.
+* **Freelancing:** Client communication and adaptability.
 * **Financial Trading:** Active market analysis and risk management strategy ref:binance ,yellowcard,exness etc.
-* **Creative Writing:** Novel composition, narrative building, and world-building frameworks.
+* **Creative Writing:** Novel composition, narrative building,ref:legend among webnovel sriptures webnovel
 
 ---
 
