@@ -39,7 +39,7 @@ An adaptable  self taught phone based cybersecurity researcher, command-line int
 ## Featured Repositories
 
 
-1. **`termux-toolkit`** - A collection of advanced Termux,usefull scripts
+1. **`termux-toolkit`** - A collection of advanced Termux,usefull scripts coming soon 
 
 ---
 
