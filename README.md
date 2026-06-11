@@ -1,6 +1,6 @@
 # PORTFOLIO-                                              # Hi there, I'm Glen Washington Pez 
 
-An adaptable  self taught phone based cybersecurity researcher, command-line interface (CLI) developer, and technical administrator based in Kisumu, Kenya. I specialize in penetration testing, advanced network routing, and automated tool development.
+An adaptable  self taught phone based cybersecurity researcher, command-line interface (CLI) developer, and technical administrator based in Kisumu, Kenya. I specialize in penetration testing,  network routing, and automated tool development.
 
 **Open for Collaborations:** 
 * **Phone/WhatsApp:** +254 742 582 819
@@ -13,14 +13,14 @@ An adaptable  self taught phone based cybersecurity researcher, command-line int
 
 ### Cybersecurity & Pentesting
 * **Web Security:** OWASP Top 10 auditing, secure brute-force execution, and vulnerability assessment.
-* **Reconnaissance:** Advanced open-source intelligence (OSINT), web scraping, and active footprinting.
+* **Reconnaissance:**  open-source intelligence (OSINT), web scraping, and active footprinting.
 * **Bug Bounty Hunting:** Finding and documenting security flaws in web infrastructure.
-* **Forensics:** Digital investigation, log analysis, and artifact recovery.
+* **Forensics:** Digital investigation, log analysis, and file detachment.
 
 ### Networking & Infrastructure
 * **Traffic Routing:**  network traffic manipulation and custom routing protocols.
 * **BGP & ASN:** Autonomous System Number (ASN) website traffic routing and management.
-* **Terminal Mastery:** Advanced Termux environment emulation, scripting, and mobile Linux administration.
+* **Terminal Mastery:** Advanced Termux environment emulation, scripting, and mobile Linux administration, mastey of  required pkgs and commands list in repo .
 
 ### Development & Mathematics
 * **Automation:** End-to-end bot creation, optimization, and cloud deployment.
