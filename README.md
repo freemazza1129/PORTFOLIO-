@@ -38,16 +38,9 @@ An adaptable  self taught phone based cybersecurity researcher, command-line int
 
 ## Featured Repositories
 
-*( Tip: Create these repositories on your profile to showcase your skills)*
 
-1. **`termux-toolkit`** - A collection of advanced Termux automation and CLI utility scripts.
-2. **`asn-router`** - Documentation and scripts exploring Autonomous Number web traffic routing.
-3. **`owasp-scanner`** - A custom reconnaissance and web scraping tool built for initial pentesting phases.
-4. **`novel-drafts`** - A markdown-based repository holding outlines and chapters of my creative writing.
+1. **`termux-toolkit`** - A collection of advanced Termux,usefull scripts
 
 ---
 
-##  GitHub Stats
-
-![Glen's GitHub Stats](https://vercel.app)
-![Top Langs](https://vercel.app)
+##  Github + render
