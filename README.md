@@ -16,6 +16,7 @@ An adaptable  self taught phone based cybersecurity researcher, command-line int
 * **Reconnaissance:**  open-source intelligence (OSINT), web scraping, and active footprinting.
 * **Bug Bounty Hunting:** Finding and documenting security flaws in web infrastructure.
 * **Forensics:** Digital investigation, log analysis, and file detachment.
+script generation + PID full control.
 
 ### Networking & Infrastructure
 * **Traffic Routing:**  network traffic manipulation and custom routing protocols.
