@@ -3,189 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Website</title>
+    <title>Interactive Dark Portfolio</title>
     <style>
-        /* Modern CSS Reset & Variables */
-        :root {
-            --primary-color: #2563eb;
-            --text-color: #334155;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-        }
-
+        /* Base Dark Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            padding: 0;
+            background-color: #0a0a0a;
+            color: #eeeeee;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Interactive Ambient Background Glow */
+        #glow-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle 150px at var(--mouse-x, 0%) var(--mouse-y, 0%), rgba(0, 255, 200, 0.08), transparent 80%);
+            z-index: 1;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         /* Header Navigation */
         header {
-            background-color: var(--card-bg);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #1f1f1f;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
+            letter-spacing: 1px;
+            color: #ffffff;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--primary-color);
+        .logo span {
+            color: #00ffc8;
         }
 
         /* Hero Section */
         .hero {
-            max-width: 1100px;
-            margin: 4rem auto;
-            padding: 0 2rem;
+            padding: 6rem 0;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
+            color: #ffffff;
             margin-bottom: 1rem;
-            color: #0f172a;
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            color: #64748b;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn {
+        /* Interactive Typing Animation */
+        .typing-text {
+            font-size: 1.5rem;
+            color: #888888;
+            border-right: 2px solid #00ffc8;
+            white-space: nowrap;
             display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: opacity 0.2s;
+            animation: blink 0.75s step-end infinite;
         }
 
-        .btn:hover {
-            opacity: 0.9;
+        /* Portfolio Grid Section */
+        .portfolio-section {
+            margin-top: 2rem;
         }
 
-        /* Features Section */
-        .features {
-            max-width: 1100px;
-            margin: 4rem auto;
-            padding: 0 2rem;
+        /* Interactive Filter Tabs */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: #111111;
+            border: 1px solid #222222;
+            color: #888888;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            border-color: #00ffc8;
+            color: #00ffc8;
+            box-shadow: 0 0 10px rgba(0, 255, 200, 0.2);
+        }
+
+        /* Grid Layout */
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
+        /* Card Layout and Interactive Tilt Effect */
         .card {
-            background: var(--card-bg);
+            background: #121212;
+            border: 1px solid #1f1f1f;
+            border-radius: 12px;
             padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: block; /* Ensures visibility toggles appropriately */
         }
 
-        .card h2 {
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #333333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #00ffc8;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #00ffc8;
+            font-weight: 600;
             margin-bottom: 0.5rem;
-            color: #0f172a;
+            display: inline-block;
         }
 
-        /* Footer */
-        footer {
-            background-color: #0f172a;
-            color: #94a3b8;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 6rem;
+        .card h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
         }
 
-        /* Responsive Design */
+        .card p {
+            color: #999999;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Custom Animations */
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #00ffc8; }
+        }
+
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.25rem; }
-            .nav-container { flex-direction: column; gap: 1rem; }
+            .hero h1 { font-size: 2.3rem; }
+            .typing-text { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo">MyWebsite</a>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Glow background tracker -->
+    <div id="glow-bg"></div>
 
-    <main>
-        <section class="hero" id="home">
-            <h1>Welcome to Your New Website</h1>
-            <p>This is a complete, clean, and modern template ready for your personal content. It features a fully responsive layout built entirely in HTML and CSS.</p>
-            <a href="#features" class="btn">Explore Features</a>
+    <div class="container">
+        <header>
+            <div class="logo">PORT<span>FOLIO</span></div>
+        </header>
+
+        <section class="hero">
+            <h1>Creative Developer</h1>
+            <!-- The text container where JS will inject characters -->
+            <div class="typing-text" id="interactive-text"></div>
         </section>
 
-        <section class="features" id="features">
-            <div class="card">
-                <h2> Fast Loading</h2>
-                <p>Clean code architecture ensures your pages load rapidly for visitors on any network condition.</p>
+        <section class="portfolio-section">
+            <!-- Filter Controls -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterSelection('all')">All Work</button>
+                <button class="filter-btn" onclick="filterSelection('development')">Development</button>
+                <button class="filter-btn" onclick="filterSelection('design')">Design</button>
             </div>
-            <div class="card">
-                <h2>Fully Responsive</h2>
-                <p>The fluid grid system scales seamlessly to fit smartphones, tablets, and desktop displays flawlessly.</p>
-            </div>
-            <div class="card">
-                <h2> Easy to Customize</h2>
-                <p>Modify the core CSS variables at the top of the file to completely change fonts, colors, and styling instantly.</p>
+
+            <!-- Portfolio Showcase Grid -->
+            <div class="grid">
+                <div class="card development">
+                    <span class="tag">Development</span>
+                    <h3>E-Commerce Engine</h3>
+                    <p>High-performance backend API system built with native Node.js architectures.</p>
+                </div>
+                <div class="card design">
+                    <span class="tag">Design</span>
+                    <h3>Cyberpunk UI Framework</h3>
+                    <p>A dark, neon aesthetic component system layout engineered for web applications.</p>
+                </div>
+                <div class="card development">
+                    <span class="tag">Development</span>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Real-time telemetry event tracking using canvas manipulation data rendering pipelines.</p>
+                </div>
             </div>
         </section>
-    </main>
+    </div>
 
-    <footer id="contact">
-        <p>&copy; 2026 MyWebsite. Built with clean HTML & CSS.</p>
-    </footer>
+    <script>
+        // Interaction 1: Cursor-Tracking Ambient Glow Effect
+        const glowBg = document.getElementById('glow-bg');
+        window.addEventListener('mousemove', (e) => {
+            const x = ((e.clientX / window.innerWidth) * 100).toFixed(2);
+            const y = ((e.clientY / window.innerHeight) * 100).toFixed(2);
+            glowBg.style.setProperty('--mouse-x', `${x}%`);
+            glowBg.style.setProperty('--mouse-y', `${y}%`);
+        });
 
+        // Interaction 2: Dynamic Auto-Typing Text Effect Loop
+        const dynamicWords = ["Building Next-Gen Webapps.", "Designing Clean Code Interfaces.", "Optimized for Absolute Performance."];
+        let mainWordIndex = 0;
+        let characterIndex = 0;
+        let isDeleting = false;
+        const textTarget = document.getElementById("interactive-text");
+
+        function handleTypingEffect() {
+            const activeString = dynamicWords[mainWordIndex];
+            
+            if (isDeleting) {
+                textTarget.textContent = activeString.substring(0, characterIndex - 1);
+                characterIndex--;
+            } else {
+                textTarget.textContent = activeString.substring(0, characterIndex + 1);
+                characterIndex++;
+            }
+
+            let pacingSpeed = isDeleting ? 40 : 90;
+
+            if (!isDeleting && characterIndex === activeString.length) {
+                pacingSpeed = 2000; // Hold full sentence state
+                isDeleting = true;
+            } else if (isDeleting && characterIndex === 0) {
+                isDeleting = false;
+                mainWordIndex = (mainWordIndex + 1) % dynamicWords.length;
+                pacingSpeed = 400; // Delay before typing next word
+            }
+
+            setTimeout(handleTypingEffect, pacingSpeed);
+        }
+        // Fire up typing loop
+        document.addEventListener("DOMContentLoaded", () => handleTypingEffect());
+
+        // Interaction 3: Portfolio Layout Item Category Filter System
+        function filterSelection(categoryName) {
+            const portfolioCards = document.getElementsByClassName("card");
+            const structuralButtons = document.getElementsByClassName("filter-btn");
+            
+            // Manage Active Button States
+            for (let btn of structuralButtons) {
+                if (btn.getAttribute('onclick').includes(categoryName)) {
+                    btn.classList.add("active");
+                } else {
+                    btn.classList.remove("active");
+                }
+            }
+
+            // Manage Target Card Visibility
+            for (let card of portfolioCards) {
+                if (categoryName === "all") {
+                    card.style.display = "block";
+                } else {
+                    if (card.classList.contains(categoryName)) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
